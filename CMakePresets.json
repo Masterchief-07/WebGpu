@@ -1,0 +1,58 @@
+{
+    "version": 10,
+    "configurePresets": [
+        {
+            "name": "BASE",
+            "hidden": true,
+            "generator": "Ninja",
+            "binaryDir": "${sourceDir}/build/${presetName}",
+            "installDir": "${sourceDir}/install/${presetName}",
+            "cacheVariables": {
+                "CMAKE_CXX_STANDARD": "23",
+                "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+                "CMAKE_CXX_EXTENSIONS": "OFF",
+                "CMAKE_EXPORT_COMPILE_COMMANDS": "ON"
+            }
+        },
+        {
+            "name": "gccDebug",
+            "inherits": "BASE",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE" : "Debug",
+                "CMAKE_CXX_COMPILER": "g++",
+                "CMAKE_C_COMPILER": "gcc",
+                "CMAKE_CXX_FLAGS_INIT": "-Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wconversion -Wsign-conversion -Wformat=2"
+            }
+        },
+        {
+            "name": "clangDebug",
+            "inherits": "BASE",
+            "cacheVariables": {
+                "CMAKE_BUILD_TYPE" : "Debug",
+                "CMAKE_CXX_COMPILER": "clang++",
+                "CMAKE_C_COMPILER": "clang",
+                "CMAKE_CXX_FLAGS_INIT": "-Wall -Wextra -Wpedantic -Wshadow -Wnon-virtual-dtor -Wold-style-cast -Wcast-align -Wunused -Woverloaded-virtual -Wconversion -Wsign-conversion"
+            }
+        }
+
+    ],
+    "buildPresets": [
+        {
+            "name": "BASE",
+            "hidden": true
+        },
+        {
+            "name": "gccBuild",
+            "inherits" : "BASE",
+            "configurePreset": "gccDebug",
+            "configuration": "Debug"
+        },
+        {
+            "name": "clangBuild",
+            "inherits" : "BASE",
+            "configurePreset": "clangDebug",
+            "configuration": "Debug"
+        }
+
+    ]
+}

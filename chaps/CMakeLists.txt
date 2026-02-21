@@ -1,0 +1,4 @@
+add_subdirectory(chap1_gettingStarted)
+add_subdirectory(chap2_basic3d)
+add_subdirectory(chap3_basicCompute)
+add_subdirectory(chap4_advancedTechniques)
