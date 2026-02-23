@@ -1,4 +1,4 @@
-#include <webgpu/webgpu.h>
+#include <JGPU/Instance.hpp>
 #include <iostream>
 
 auto main() -> int{
@@ -6,15 +6,14 @@ auto main() -> int{
     WGPUInstanceDescriptor desc = {};
     desc.nextInChain = nullptr;
 
-    WGPUInstance instance = wgpuCreateInstance(&desc);
+    const auto instance = JGPU::Instance(desc);
 
-    if(!instance)
+    if(!instance.isValid())
     {
         std::cerr<<"Could not initialize WebGPU\n";
         return 1;
     }
 
-    std::cout<<"WGPU instance: "<<instance<<"\n";
-    wgpuInstanceRelease(instance);
+    std::cout<<"WGPU instance: "<<instance.getWGPUInstance()<<"\n";
     return 0;
 }
